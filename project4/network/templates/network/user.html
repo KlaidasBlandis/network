@@ -1,0 +1,26 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <form action="{% url 'follow' %}">
+        <input type="hidden" value="{{ user.user.id }}" name="user">
+        {% if user.request != user_p.user %}
+            {% if user.followed %}
+                <input type="hidden" value="1" name="f">
+                <input type="submit" value="Unfollow">
+            {% else %}
+                <input type="hidden" value="0" name="f">
+                <input type="submit" value="Follow">
+            {% endif %}
+        {% endif %}
+    </form>
+    <h2>Followers: {{ user_p.followers }}</h2>
+    <h2>Following: {{ user_p.following }}</h2>
+    {% for post in posts %}
+        <div>
+            <div>{{ post.text }}</div>
+            <h6>{{ post.date }}</h5>
+            <h6>{{ post.time }}</h5>
+            <h3>Likes: {{ post.likes }}</h3>
+        </div>
+    {% endfor %}
+{% endblock %}
