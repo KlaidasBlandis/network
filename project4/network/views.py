@@ -107,6 +107,7 @@ def follow(request):
 def following(request):
     user = request.user
     following = Follower.objects.filter(follower=user)
+    print(following)
     return render(request, "network/following.html", {
         "pages": following
     })
