@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -82,17 +83,16 @@ def user_page(request, user_id):
     user_page = UserPage.objects.get(user=user)
 
     return render(request, "network/user.html", {
-        "user_p": user_page,
+        "user": user_page,
         "posts": reversed(NewPost.objects.filter(user=user).all())
     })
 
+@login_required
 def follow(request):
     f = request.GET["f"]
     page_user = request.GET["user"]
-    print (page_user)
     follower = request.user
     up = UserPage.objects.get(user=page_user)
-    print(up)
     # renders the 1 as a text
     if f == '1':
         followers = up.followers - 1
@@ -108,5 +108,5 @@ def following(request):
     user = request.user
     following = Follower.objects.filter(follower=user)
     return render(request, "network/following.html", {
-        "pages": following.user_page
+        "pages": following
     })

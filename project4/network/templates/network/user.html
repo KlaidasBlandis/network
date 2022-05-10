@@ -3,7 +3,7 @@
 {% block body %}
     <form action="{% url 'follow' %}">
         <input type="hidden" value="{{ user.user.id }}" name="user">
-        {% if user.request != user_p.user %}
+        {% if user.request != user.user %}
             {% if user.followed %}
                 <input type="hidden" value="1" name="f">
                 <input type="submit" value="Unfollow">
@@ -13,8 +13,8 @@
             {% endif %}
         {% endif %}
     </form>
-    <h2>Followers: {{ user_p.followers }}</h2>
-    <h2>Following: {{ user_p.following }}</h2>
+    <h2>Followers: {{ user.followers }}</h2>
+    <h2>Following: {{ user.following }}</h2>
     {% for post in posts %}
         <div>
             <div>{{ post.text }}</div>

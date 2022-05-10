@@ -3,11 +3,11 @@
 {% block body %}
     {% for page in pages %}
     <div>
-        <h1><a href="{% url 'user_page' page.user.id %}">{{ page.user }}</a></h1>
-        <div>{{ page.text }}</div>
-        <h6>{{ page.date }}</h5>
-        <h6>{{ page.time }}</h5>
-        <h3>Likes: {{ page.likes }}</h3>
+        <h1><a href="{% url 'user_page' page.user.id %}">{{ page.user_page.user }}</a></h1>
+        <div>{{ page.user_page.text }}</div>
+        <h6>{{ page.user_page.date }}</h5>
+        <h6>{{ page.user_page.time }}</h5>
+        <h3>Likes: {{ page.user_page.likes }}</h3>
     </div>
     {% endfor %}
 {% endblock %}
